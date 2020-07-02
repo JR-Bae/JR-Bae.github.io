@@ -17,7 +17,7 @@ name: 쥬르릉
 description: "
   한 여자의 남편,\n
   한 아이의 아빠,\n
-  iOS 개발자,\n
+  개발자,\n
   잘먹고 즐기며 잘살자.
   "
 # Base URL of site (i.e. /blog). It should always start with a slash,
@@ -26,7 +26,7 @@ description: "
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "https://jr-bae.github.io" # the base hostname & protocol for your site
 cover: "/assets/header_image.jpg"
-logo: "/assets/logo.png"
+logo: "/assets/test_40X40.png"
 
 # Build settings
 markdown: kramdown
