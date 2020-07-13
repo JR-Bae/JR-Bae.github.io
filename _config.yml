@@ -9,7 +9,7 @@ exclude:
   - "/vendor/"
 
 # Site settings
-title: "쥬르릉's blog"
+title: "쥬르릉's blog_test"
 subtitle: "AI, Big Data, Programming, 육아"
 email: izzon7k@gmail.com
 name: 쥬르릉
