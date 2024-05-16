@@ -17,6 +17,7 @@ on:
       branch:
         description: 'Deployment environment (dev/prod)'
         required: true
+        type: choice
         options:
           - dev
           - prod
