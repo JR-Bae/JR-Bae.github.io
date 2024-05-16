@@ -14,8 +14,8 @@ on:
       version:
         description: 'Version number'
         required: true
-      branch:
-        description: 'Deployment environment (dev/prod)'
+      environment:
+        description: 'Deployment environment'
         required: true
         type: choice
         options:
@@ -30,27 +30,36 @@ jobs:
   build-and-deploy:
     if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
-    env:
-      CLUSTER_NAME: skcc-genai-demo
-      APP_NAME: core-svc
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.branch == 'dev' && 'develop' || github.event.inputs.branch == 'prod' && 'main' || github.event.pull_request.base.ref }}
+          ref: |
+            ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'dev' && 'develop' || github.event.inputs.environment == 'prod' && 'main' || github.event.pull_request.base.ref }}
 
       - name: Set Environment Variables
-        id: set-env
         run: |
-          if [[ "${{ github.event.inputs.branch }}" == "prod" ]]; then
-            echo "NAMESPACE=genai-system" >> $GITHUB_ENV
-            echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
-            echo "DEPLOYMENT_NAME=genai-core-svc" >> $GITHUB_ENV
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            if [[ "${{ github.event.inputs.environment }}" == "prod" ]]; then
+              echo "NAMESPACE=genai-system" >> $GITHUB_ENV
+              echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
+              echo "DEPLOYMENT_NAME=genai-core-svc" >> $GITHUB_ENV
+            else
+              echo "NAMESPACE=devai-system" >> $GITHUB_ENV
+              echo "VERSION=${{ github.event.inputs.version }}-dev" >> $GITHUB_ENV
+              echo "DEPLOYMENT_NAME=devai-core-svc" >> $GITHUB_ENV
+            fi
           else
-            echo "NAMESPACE=devai-system" >> $GITHUB_ENV
-            echo "VERSION=${{ github.event.inputs.version }}-dev" >> $GITHUB_ENV
-            echo "DEPLOYMENT_NAME=devai-core-svc" >> $GITHUB_ENV
+            if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+              echo "NAMESPACE=genai-system" >> $GITHUB_ENV
+              echo "VERSION=1.1.2" >> $GITHUB_ENV
+              echo "DEPLOYMENT_NAME=genai-core-svc" >> $GITHUB_ENV
+            else
+              echo "NAMESPACE=devai-system" >> $GITHUB_ENV
+              echo "VERSION=1.1.2-dev" >> $GITHUB_ENV
+              echo "DEPLOYMENT_NAME=devai-core-svc" >> $GITHUB_ENV
+            fi
           fi
 
       - name: Login ACR
