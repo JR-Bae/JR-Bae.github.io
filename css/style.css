@@ -1,36 +1,113 @@
-/* 버튼 이미지 스타일 */
-button img.large-icon {
-    width: 100px; /* 버튼 이미지 너비 */
-    height: auto; /* 비율 유지 */
-    display: block; /* 버튼 안에서 이미지만 표시 */
-    margin: 0 auto; /* 이미지 중앙 정렬 */
+/* 공통 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
 }
 
-/* 버튼 텍스트 숨김 */
-button img.large-icon + span {
-    display: none;
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
 }
 
-/* 기존 버튼 스타일 */
+#balance {
+    font-size: 1.5rem;
+    margin: 20px 0;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px; /* 버튼 간격 */
+}
+
 button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
+    background: none; /* 배경 제거 */
+    border: none; /* 테두리 제거 */
     cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
 }
 
-#add-btn {
-    background-color: #4CAF50;
-    color: white;
+button img {
+    width: 150px; /* 이미지 너비 */
+    height: auto; /* 비율 유지 */
+    display: block;
+    margin-bottom: 10px; /* 텍스트와의 간격 */
 }
 
-#subtract-btn {
-    background-color: #F44336;
-    color: white;
+button span {
+    font-size: 1.2rem; /* 텍스트 크기 */
+}
+
+/* 거래 내역 스타일 */
+#transactions {
+    margin-top: 30px;
+    text-align: left;
+}
+
+#transactions h2 {
+    text-align: center;
+}
+
+#transaction-list {
+    list-style: none;
+    padding: 0;
+}
+
+#transaction-list li {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) { /* 태블릿 크기 */
+    h1 {
+        font-size: 2rem;
+    }
+
+    button img {
+        width: 120px; /* 이미지 크기 줄이기 */
+    }
+
+    button span {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) { /* 작은 태블릿 크기 */
+    button img {
+        width: 100px;
+    }
+
+    button span {
+        font-size: 0.9rem;
+    }
+
+    .button-container {
+        gap: 10px; /* 버튼 간격 줄이기 */
+    }
+}
+
+@media (max-width: 480px) { /* 스마트폰 크기 */
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    button img {
+        width: 80px;
+    }
+
+    button span {
+        font-size: 0.8rem;
+    }
+
+    .button-container {
+        flex-direction: column; /* 버튼 세로 배치 */
+        gap: 15px;
+    }
 }
