@@ -1,5 +1,5 @@
 // 데이터 관리용 URL
-const dataURL = '/data/balance.json';
+const dataURL = './data/balance.json';
 
 // HTML 요소 참조
 const balanceElement = document.getElementById('balance');
@@ -8,11 +8,17 @@ let balance = 0;
 
 // 데이터 불러오기
 async function loadData() {
-    const response = await fetch(dataURL);
-    const data = await response.json();
-    balance = data.balance;
-    balanceElement.textContent = `현재 잔액: ${balance.toLocaleString()}원`;
-    renderTransactions(data.transactions);
+    try {
+        const response = await fetch(dataURL);
+        if (!response.ok) throw new Error('JSON 데이터를 불러오지 못했습니다.');
+        const data = await response.json();
+        balance = data.balance;
+        balanceElement.textContent = `현재 잔액: ${balance.toLocaleString()}원`;
+        renderTransactions(data.transactions);
+    } catch (error) {
+        console.error('데이터 로드 오류:', error);
+        balanceElement.textContent = '잔액 정보를 불러오지 못했습니다.';
+    }
 }
 
 // 거래 내역 렌더링
@@ -47,7 +53,6 @@ async function addTransaction(type) {
         photo: photo || null,
     };
 
-    // 업데이트된 데이터로 잔액 갱신
     balance += type === 'add' ? transaction.amount : -transaction.amount;
 
     const updatedData = {
@@ -55,6 +60,7 @@ async function addTransaction(type) {
         transactions: await getTransactions().concat(transaction),
     };
 
+    console.log('업데이트된 데이터:', updatedData);
     await saveData(updatedData);
     loadData();
 }
@@ -66,9 +72,10 @@ async function getTransactions() {
     return data.transactions;
 }
 
-// 데이터 저장 (수동으로 커밋해야 함)
+// 데이터 저장 (수동으로 GitHub API 사용 필요)
 async function saveData(data) {
-    console.log('업데이트된 데이터:', data); // GitHub Actions로 업데이트 시 필요
+    // GitHub API를 사용하거나 커밋 후 배포 필요
+    alert('현재는 데이터 저장이 지원되지 않습니다. GitHub Actions를 설정하세요.');
 }
 
 // 버튼 이벤트 핸들링

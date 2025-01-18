@@ -1,26 +1,17 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 20px;
-    margin: 0;
+/* 버튼 이미지 스타일 */
+button img.large-icon {
+    width: 100px; /* 버튼 이미지 너비 */
+    height: auto; /* 비율 유지 */
+    display: block; /* 버튼 안에서 이미지만 표시 */
+    margin: 0 auto; /* 이미지 중앙 정렬 */
 }
 
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+/* 버튼 텍스트 숨김 */
+button img.large-icon + span {
+    display: none;
 }
 
-#balance {
-    font-size: 1.5rem;
-    margin: 20px 0;
-}
-
-.button-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
+/* 기존 버튼 스타일 */
 button {
     padding: 10px 20px;
     font-size: 1rem;
@@ -28,8 +19,10 @@ button {
     border-radius: 5px;
     cursor: pointer;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 5px;
+    justify-content: center;
+    gap: 10px;
 }
 
 #add-btn {
@@ -40,32 +33,4 @@ button {
 #subtract-btn {
     background-color: #F44336;
     color: white;
-}
-
-#transactions {
-    margin-top: 30px;
-    text-align: left;
-}
-
-#transactions h2 {
-    text-align: center;
-}
-
-#transaction-list {
-    list-style: none;
-    padding: 0;
-}
-
-#transaction-list li {
-    border-bottom: 1px solid #ccc;
-    padding: 10px;
-}
-
-.transaction-photo {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-right: 10px;
-    vertical-align: middle;
 }
