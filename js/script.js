@@ -1,7 +1,5 @@
-// 데이터 관리용 URL
 const dataURL = './data/balance.json';
 
-// HTML 요소 참조
 const balanceElement = document.getElementById('balance');
 const transactionList = document.getElementById('transaction-list');
 let balance = 0;
@@ -61,7 +59,6 @@ async function addTransaction(type) {
     };
 
     console.log('업데이트된 데이터:', updatedData);
-    await saveData(updatedData);
     loadData();
 }
 
@@ -70,12 +67,6 @@ async function getTransactions() {
     const response = await fetch(dataURL);
     const data = await response.json();
     return data.transactions;
-}
-
-// 데이터 저장 (수동으로 GitHub API 사용 필요)
-async function saveData(data) {
-    // GitHub API를 사용하거나 커밋 후 배포 필요
-    alert('현재는 데이터 저장이 지원되지 않습니다. GitHub Actions를 설정하세요.');
 }
 
 // 버튼 이벤트 핸들링
