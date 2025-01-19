@@ -1,67 +1,122 @@
 /* 공통 스타일 */
 body {
+    background-color: #00274d; /* 어두운 파랑색 (남색) */
     font-family: Arial, sans-serif;
     text-align: center;
     padding: 20px;
     margin: 0;
+    color: white; /* 기본 글씨 색상 */
+    display: flex;
+    flex-direction: column; /* 상단과 하단을 나누기 위한 flex 사용 */
+    height: 100vh; /* 화면 전체 높이 */
 }
 
+/* 헤더 스타일 */
 h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
 }
 
+h1 span:first-child {
+    color: #FFD700; /* 지호 (노란색) */
+}
+
+h1 span:last-child {
+    color: #FF4500; /* 저금통 (붉은 계열) */
+}
+
+/* 잔액 표시 */
 #balance {
     font-size: 1.5rem;
     margin: 20px 0;
 }
 
+/* 거래 내역 */
+#transactions {
+    margin-top: 20px;
+    flex-grow: 1; /* 상단과 하단 사이의 공간 차지 */
+    overflow-y: auto; /* 거래 내역이 길어질 경우 스크롤 추가 */
+    text-align: center;
+}
+
+#transactions h2 {
+    text-align: center;
+    color: white; /* 거래 내역 제목 색상 */
+}
+
+#transaction-list {
+    list-style: none;
+    padding: 0;
+    color: white; /* 거래 내역 텍스트 색상 */
+}
+
+#transaction-list li {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+}
+
+/* 버튼 컨테이너 */
 .button-container {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px; /* 버튼 간격 */
+    align-items: center;
+    gap: 10px; /* 버튼 간격 좁히기 */
+    padding: 20px;
+    background-color: #001f3f; /* 버튼 뒤 어두운 배경 */
+    position: sticky;
+    bottom: 0;
+    width: 100%;
 }
 
+/* 버튼 스타일 */
 button {
-    background: none; /* 배경 제거 */
-    border: none; /* 테두리 제거 */
+    border: none;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between; /* 텍스트를 하단에 붙이기 */
+    padding: 10px;
+    width: 180px; /* 버튼 고정 너비 */
+    height: 200px; /* 버튼 고정 높이 */
+    border-radius: 10px; /* 둥근 모서리 */
+    color: white; /* 텍스트 흰색 */
+    font-size: 1.3rem; /* 텍스트 크기 */
+    font-weight: bold;
+    text-align: center;
+    background-color: #00274d; /* 배경 유지 */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 버튼 그림자 */
+}
+
+/* 돈 넣기 버튼 */
+#add-btn {
+    background-color: #228B22; /* 초록색 */
+}
+
+#add-btn:hover {
+    background-color: #32CD32; /* 밝은 초록색 (호버 효과) */
+}
+
+/* 돈 빼기 버튼 */
+#subtract-btn {
+    background-color: #FF6347; /* 주황색 */
+}
+
+#subtract-btn:hover {
+    background-color: #FF4500; /* 붉은 주황색 (호버 효과) */
 }
 
 button img {
     width: 150px; /* 이미지 너비 */
     height: auto; /* 비율 유지 */
     display: block;
-    margin-bottom: 10px; /* 텍스트와의 간격 */
 }
 
 button span {
+    margin-top: auto; /* 텍스트를 하단에 붙이기 */
+    margin-bottom: 5px; /* 텍스트와 버튼 하단 간격 */
     font-size: 1.2rem; /* 텍스트 크기 */
-}
-
-/* 거래 내역 스타일 */
-#transactions {
-    margin-top: 30px;
-    text-align: left;
-}
-
-#transactions h2 {
     text-align: center;
-}
-
-#transaction-list {
-    list-style: none;
-    padding: 0;
-}
-
-#transaction-list li {
-    border-bottom: 1px solid #ccc;
-    padding: 10px;
 }
 
 /* 반응형 디자인 */
@@ -70,12 +125,17 @@ button span {
         font-size: 2rem;
     }
 
+    button {
+        width: 160px; /* 버튼 너비 줄이기 */
+        height: 180px; /* 버튼 높이 줄이기 */
+    }
+
     button img {
         width: 120px; /* 이미지 크기 줄이기 */
     }
 
     button span {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
 }
 
@@ -85,11 +145,11 @@ button span {
     }
 
     button span {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
     .button-container {
-        gap: 10px; /* 버튼 간격 줄이기 */
+        gap: 8px; /* 버튼 간격 줄이기 */
     }
 }
 
@@ -98,12 +158,17 @@ button span {
         font-size: 1.8rem;
     }
 
+    button {
+        width: 120px; /* 버튼 너비 줄이기 */
+        height: 160px; /* 버튼 높이 줄이기 */
+    }
+
     button img {
         width: 80px;
     }
 
     button span {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
     }
 
     .button-container {
